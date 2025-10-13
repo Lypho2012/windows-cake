@@ -4,19 +4,65 @@ import defaultBackground from "./images/default_background.jpeg";
 import "./Desktop.css"
 
 function Desktop() {
-    const [screenHeight,setScreenHeight] = useState(window.innerHeight)
-    const [screenWidth,setScreenWidth] = useState(window.innerWidth)
+    // const [screenHeight,setScreenHeight] = useState(window.innerHeight)
+    // const [screenWidth,setScreenWidth] = useState(window.innerWidth)
+    const [giftX] = useState(Math.floor(Math.random()*(window.innerWidth-150)))
+    const [giftY] = useState(Math.floor(Math.random()*(window.innerHeight-150)))
     const [backgroundImage,setBackgroundImage] = useState(defaultBackground)
 
-    useEffect(() => {
-        try {
-            axios.post(`http://localhost:8000/create-background-image?screen_width=${screenWidth}&screen_height=${screenHeight}`)
-        } catch (error) {
-            console.error(error);
-        }
-    },[])
-    const triggerAnimation = () => {
+    const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
 
+    const [showAnimation1, setShowAnimation1] = useState(false)
+    const [showAnimation2, setShowAnimation2] = useState(false)
+
+    const dialog1Options = ["You failed to open the application.","Hm, that's strange."]
+    const [animation1Counter, setAnimation1Counter] = useState(0)
+    const handleCloseAnimation1 = async () => {
+        setShowAnimation1(false)
+        await sleep(1000)
+        if (animation1Counter+1 == dialog1Options.length) {
+            setAnimation1Counter(0)
+            setShowAnimation2(true)
+        } else {
+            setAnimation1Counter(animation1Counter+1)
+            setShowAnimation1(true)
+        }
+    }
+    const Animation1 = () => {
+        return <dialog 
+        open={showAnimation1} 
+        onClose={() => handleCloseAnimation1()}
+        style={{
+            paddingTop:"10px",
+            border: "1px solid black", 
+            borderRadius:"5px",
+            background: "linear-gradient(to bottom, #8faacd, #d2def1ff)",
+            boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)"}}>
+            <div style={{
+                position:"absolute",
+                right:"20px",
+                margin:"none",
+                padding:"none",
+                fontStretch:"expanded",
+                userSelect: "none",
+                cursor:"pointer"}} onClick={() => handleCloseAnimation1()}>X</div>
+            <div style={{border:"1px solid grey",display:"flex",justifyContent: "center",marginTop:"20px",height:"200px",width:"350px",background:"white"}}>
+                <div style={{width:"100%",paddingLeft:"10px",paddingTop:"10px",textAlign:"left"}}>{dialog1Options[animation1Counter]}</div>
+                <button onClick={() => handleCloseAnimation1()} style={{position:"absolute",height:"fit-content",bottom:"20px",boxShadow: "1px 1px 1px rgba(0, 0, 0, 0.2)",cursor:"pointer"}}>Ok</button>
+            </div>
+        </dialog>
+    }
+
+    // Uncomment below section if purchased PixelLab tokens
+    // useEffect(() => {
+    //     try {
+    //         axios.post(`http://localhost:8000/create-background-image?screen_width=${screenWidth}&screen_height=${screenHeight}`)
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // },[])
+    const triggerAnimation = () => {
+        setShowAnimation1(true)
     }
     return (
         <div id="desktop-div" style={{
@@ -27,10 +73,11 @@ function Desktop() {
                 background:"none",
                 border:"none",
                 position:"fixed",
-                left:`${Math.floor(Math.random()*window.innerWidth-150)}px`,
-                top:`${Math.floor(Math.random()*window.innerHeight-150)}px`}}>
+                left:`${giftX}px`,
+                top:`${giftY}px`}}>
                 <img src={require("./images/gift.png")} alt='gift box' style={{width:'150px',cursor:'pointer'}} onClick={triggerAnimation}/>
             </button>
+            <Animation1/>
         </div>
     )
 }
