@@ -1,0 +1,4 @@
+pixellab
+python-dotenv
+fastapi[standard]
+Pillow
