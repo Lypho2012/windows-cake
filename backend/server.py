@@ -29,9 +29,9 @@ app.add_middleware(
 )
 
 @app.post("/create-background-image")
-async def createImage():
-    # screen_width = screen_data["screenWidth"]
-    # screen_height = screen_data["screenHeight"]
+async def createImage(screen_width:int,screen_height:int):
+    screen_width = int(screen_width*400/max(screen_width,screen_height))
+    screen_height = int(screen_height*400/max(screen_width,screen_height))
     season = ""
     month = datetime.now().month
     if month < 3 or month == 12:
@@ -57,10 +57,9 @@ async def createImage():
         timeofday = "dusk"
     else:
         timeofday = "midnight"
-    # print(screen_width,screen_height,type(screen_height))
-    # response = client.generate_image_pixflux(
-    #     description="fantasy background in "+season+" at "+timeofday,
-    #     image_size=dict(width=screen_width, height=screen_height),
-    # )
-    # img = response.image.pil_image()
-    # img.save("./src/images/background.png")
+    response = client.generate_image_pixflux(
+        description="fantasy background in "+season+" at "+timeofday,
+        image_size={"width":screen_width, "height":screen_height},
+    )
+    img = response.image.pil_image()
+    img.save("./src/images/background.png")
