@@ -14,9 +14,9 @@ function Desktop() {
     const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
 
     const [showLoad, setShowLoad] = useState(false)
-    const [progress, setProgress] = useState(70)
     const [showAnimation1, setShowAnimation1] = useState(false)
-    const [showAnimation2, setShowAnimation2] = useState(true)
+    const [showAnimation2, setShowAnimation2] = useState(false)
+    const [showAnimation3, setShowAnimation3] = useState(false)
 
     const dialog1Options = [
         "You failed to open the application.",
@@ -54,12 +54,13 @@ function Desktop() {
             borderRadius:"5px",
             background: "linear-gradient(to bottom, #8faacd, #d2def1ff)",
             boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)",
-            marginTop:"auto"}}>
+            marginTop:"auto",
+            fontFamily:"'Lucida Console', monospace",
+            textAlign:"left"}}>
             <div style={{display:"flex",flexDirection:"row"}}>
                 <div style={{
                     width:"100%",
                     textAlign:"left",
-                    fontFamily:"'Lucida Console', monospace",
                     overflowWrap: "break-word"}}>Application Message</div>
                 <div style={{
                     position:"absolute",
@@ -82,19 +83,18 @@ function Desktop() {
                 marginTop:"10px",
                 height:"200px",
                 width:"350px",
-                background:"white"}}>
+                background:"white",
+                padding: "10px"}}>
                 {children}
             </div>
         </dialog>
     }
+    
     const Animation1 = () => {
         return <WindowsAlert handleClose={handleCloseAnimation1} show={showAnimation1}>
             <div style={{
                 width:"100%",
-                paddingLeft:"10px",
-                paddingTop:"10px",
                 textAlign:"left",
-                fontFamily:"'Lucida Console', monospace",
                 overflowWrap: "break-word"}}>{dialog1Options[animation1Counter]}</div>
             <button onClick={() => handleCloseAnimation1()} 
                     style={{
@@ -108,8 +108,12 @@ function Desktop() {
 
     const Animation2 = () => {
         useEffect(() => {
-            const timer = setInterval(() => {
+            const timer = setInterval(async () => {
                 setShowAnimation2(false);
+                setShowLoad(true)
+                await sleep(1000)
+                setShowLoad(false)
+                setShowAnimation3(true);
             }, 10000);
 
             return () => {
@@ -117,9 +121,12 @@ function Desktop() {
             };
         }, [])
         return <WindowsAlert handleClose={handleCloseAnimation2} show={showAnimation2}>
-            <div className="progress">
-                <div className="progress_inner"></div>
-                <div className="progress_right"></div>
+            <div style={{display:"flex",flexDirection:"column"}}>
+                <div>Please wait while the application is fetching server 2.</div>
+                <div className="progress">
+                    <div className="progress_inner"></div>
+                    <div className="progress_right"></div>
+                </div>
             </div>
         </WindowsAlert>
     }

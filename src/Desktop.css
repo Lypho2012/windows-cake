@@ -3,12 +3,13 @@
     height: 100vh;
 }
 .progress {
-    width: 75vh;
     height: 2.5rem;
     position: relative;
     background: #e6e6e6;
     border: 1px solid #bcbcbc;
     display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .progress .progress_right {
