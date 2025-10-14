@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import defaultBackground from "./images/default_background.jpeg";
 import "./Desktop.css"
-import { CircularProgress } from "@mui/material";
 
 function Desktop() {
     // const [screenHeight,setScreenHeight] = useState(window.innerHeight)
@@ -35,10 +34,18 @@ function Desktop() {
             setShowAnimation1(true)
         }
     }
-    const Animation1 = () => {
+
+    const handleCloseAnimation2 = async () => {
+        setShowAnimation2(false)
+        setShowLoad(true)
+        await sleep(1000)
+        setShowLoad(false)
+    }
+
+    const WindowsAlert: React.FC<any> = ({handleClose, show, children}) => {
         return <dialog 
-        open={showAnimation1} 
-        onClose={() => handleCloseAnimation1()}
+        open={show} 
+        onClose={() => handleClose()}
         style={{
             paddingTop:"10px",
             border: "1px solid black", 
@@ -51,7 +58,7 @@ function Desktop() {
                     width:"100%",
                     textAlign:"left",
                     fontFamily:"'Lucida Console', monospace",
-                    overflowWrap: "break-word"}}>Application Error</div>
+                    overflowWrap: "break-word"}}>Application Message</div>
                 <div style={{
                     position:"absolute",
                     right:"20px",
@@ -64,7 +71,7 @@ function Desktop() {
                     border:"1px solid grey",
                     borderRadius:"3px",
                     background:"linear-gradient(to bottom, #ffdedeff, #ab5151ff)",
-                    color:"white"}} onClick={() => handleCloseAnimation1()}>X</div>
+                    color:"white"}} onClick={() => handleClose()}>X</div>
             </div>
             <div style={{
                 border:"1px solid grey",
@@ -74,22 +81,35 @@ function Desktop() {
                 height:"200px",
                 width:"350px",
                 background:"white"}}>
-                <div style={{
-                    width:"100%",
-                    paddingLeft:"10px",
-                    paddingTop:"10px",
-                    textAlign:"left",
-                    fontFamily:"'Lucida Console', monospace",
-                    overflowWrap: "break-word"}}>{dialog1Options[animation1Counter]}</div>
-                <button onClick={() => handleCloseAnimation1()} 
-                        style={{
-                            position:"absolute",
-                            height:"fit-content",
-                            bottom:"20px",
-                            boxShadow: "1px 1px 1px rgba(0, 0, 0, 0.2)",
-                            cursor:"pointer"}}>Ok</button>
+                {children}
             </div>
         </dialog>
+    }
+    const Animation1 = () => {
+        return <WindowsAlert handleClose={handleCloseAnimation1} show={showAnimation1}>
+            <div style={{
+                width:"100%",
+                paddingLeft:"10px",
+                paddingTop:"10px",
+                textAlign:"left",
+                fontFamily:"'Lucida Console', monospace",
+                overflowWrap: "break-word"}}>{dialog1Options[animation1Counter]}</div>
+            <button onClick={() => handleCloseAnimation1()} 
+                    style={{
+                        position:"absolute",
+                        height:"fit-content",
+                        bottom:"20px",
+                        boxShadow: "1px 1px 1px rgba(0, 0, 0, 0.2)",
+                        cursor:"pointer"}}>Ok</button>
+        </WindowsAlert>
+    }
+
+    const Animation2 = () => {
+        return <WindowsAlert handleClose={handleCloseAnimation2} show={showAnimation2}>
+            <div className="progress">
+                <div className="progress_inner"></div>
+            </div>
+        </WindowsAlert>
     }
 
     // Uncomment below section if purchased PixelLab tokens
@@ -110,7 +130,8 @@ function Desktop() {
             backgroundPosition: 'center',
             display:"flex",
             flexDirection:"column",
-            justifyContent: "center"}}>
+            justifyContent: "center",
+            cursor: showLoad ? 'wait' : 'default'}}>
             <button style={{
                 background:"none",
                 border:"none",
@@ -120,7 +141,7 @@ function Desktop() {
                 <img src={require("./images/gift.png")} alt='gift box' style={{width:'150px',cursor:'pointer'}} onClick={triggerAnimation}/>
             </button>
             <Animation1/>
-            {showLoad && <CircularProgress style={{margin:"auto"}}/>}
+            <Animation2/>
         </div>
     )
 }
