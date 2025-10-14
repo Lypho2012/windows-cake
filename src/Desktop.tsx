@@ -15,12 +15,15 @@ function Desktop() {
     const [showAnimation1, setShowAnimation1] = useState(false)
     const [showAnimation2, setShowAnimation2] = useState(false)
 
-    const dialog1Options = ["You failed to open the application.","Hm, that's strange."]
+    const dialog1Options = [
+        "You failed to open the application.",
+        "The process failed. Try again.",
+        "Attempting to access using server 2."]
     const [animation1Counter, setAnimation1Counter] = useState(0)
     const handleCloseAnimation1 = async () => {
         setShowAnimation1(false)
         await sleep(1000)
-        if (animation1Counter+1 == dialog1Options.length) {
+        if (animation1Counter+1 >= dialog1Options.length) {
             setAnimation1Counter(0)
             setShowAnimation2(true)
         } else {
@@ -38,16 +41,34 @@ function Desktop() {
             borderRadius:"5px",
             background: "linear-gradient(to bottom, #8faacd, #d2def1ff)",
             boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)"}}>
-            <div style={{
-                position:"absolute",
-                right:"20px",
-                margin:"none",
-                padding:"none",
-                fontStretch:"expanded",
-                userSelect: "none",
-                cursor:"pointer"}} onClick={() => handleCloseAnimation1()}>X</div>
-            <div style={{border:"1px solid grey",display:"flex",justifyContent: "center",marginTop:"20px",height:"200px",width:"350px",background:"white"}}>
-                <div style={{width:"100%",paddingLeft:"10px",paddingTop:"10px",textAlign:"left"}}>{dialog1Options[animation1Counter]}</div>
+            <div style={{display:"flex",flexDirection:"row"}}>
+                <div style={{
+                    width:"100%",
+                    textAlign:"left",
+                    fontFamily:"'Lucida Console', monospace",
+                    overflowWrap: "break-word"}}>Application Error</div>
+                <div style={{
+                    position:"absolute",
+                    right:"20px",
+                    margin:"none",
+                    paddingLeft:"10px",
+                    paddingRight:"10px",
+                    fontStretch:"expanded",
+                    userSelect: "none",
+                    cursor:"pointer",
+                    border:"1px solid grey",
+                    borderRadius:"3px",
+                    background:"linear-gradient(to bottom, #ffdedeff, #ab5151ff)",
+                    color:"white"}} onClick={() => handleCloseAnimation1()}>X</div>
+            </div>
+            <div style={{border:"1px solid grey",display:"flex",justifyContent: "center",marginTop:"10px",height:"200px",width:"350px",background:"white"}}>
+                <div style={{
+                    width:"100%",
+                    paddingLeft:"10px",
+                    paddingTop:"10px",
+                    textAlign:"left",
+                    fontFamily:"'Lucida Console', monospace",
+                    overflowWrap: "break-word"}}>{dialog1Options[animation1Counter]}</div>
                 <button onClick={() => handleCloseAnimation1()} style={{position:"absolute",height:"fit-content",bottom:"20px",boxShadow: "1px 1px 1px rgba(0, 0, 0, 0.2)",cursor:"pointer"}}>Ok</button>
             </div>
         </dialog>
