@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import defaultBackground from "./images/default_background.jpeg";
 import "./Desktop.css"
-import { LinearProgress } from "@mui/material";
 
 function Desktop() {
     // const [screenHeight,setScreenHeight] = useState(window.innerHeight)
@@ -42,6 +41,14 @@ function Desktop() {
         setShowLoad(true)
         await sleep(1000)
         setShowLoad(false)
+        setShowAnimation3(true);
+    }
+
+    const handleCloseAnimation3 = async () => {
+        setShowAnimation3(false)
+        setShowLoad(true)
+        await sleep(1000)
+        setShowLoad(false)
     }
 
     const WindowsAlert: React.FC<any> = ({handleClose, show, children}) => {
@@ -56,12 +63,10 @@ function Desktop() {
             boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)",
             marginTop:"auto",
             fontFamily:"'Lucida Console', monospace",
-            textAlign:"left"}}>
+            textAlign:"left",
+            overflowWrap: "break-word"}}>
             <div style={{display:"flex",flexDirection:"row"}}>
-                <div style={{
-                    width:"100%",
-                    textAlign:"left",
-                    overflowWrap: "break-word"}}>Application Message</div>
+                <div>Application Message</div>
                 <div style={{
                     position:"absolute",
                     right:"20px",
@@ -92,10 +97,7 @@ function Desktop() {
     
     const Animation1 = () => {
         return <WindowsAlert handleClose={handleCloseAnimation1} show={showAnimation1}>
-            <div style={{
-                width:"100%",
-                textAlign:"left",
-                overflowWrap: "break-word"}}>{dialog1Options[animation1Counter]}</div>
+            <div style={{width:"100%"}}>{dialog1Options[animation1Counter]}</div>
             <button onClick={() => handleCloseAnimation1()} 
                     style={{
                         position:"absolute",
@@ -109,11 +111,7 @@ function Desktop() {
     const Animation2 = () => {
         useEffect(() => {
             const timer = setInterval(async () => {
-                setShowAnimation2(false);
-                setShowLoad(true)
-                await sleep(1000)
-                setShowLoad(false)
-                setShowAnimation3(true);
+                handleCloseAnimation2()
             }, 10000);
 
             return () => {
@@ -128,6 +126,22 @@ function Desktop() {
                     <div className="progress_right"></div>
                 </div>
             </div>
+        </WindowsAlert>
+    }
+
+    const Animation3 = () => {
+        return <WindowsAlert handleClose={handleCloseAnimation3} show={showAnimation3}>
+            <div style={{display:"flex",flexDirection:"column",width:"100%"}}>
+                <div>Please enter your password:</div>
+                <input type="password"/>
+            </div>
+            <button onClick={() => handleCloseAnimation3()} 
+                    style={{
+                        position:"absolute",
+                        height:"fit-content",
+                        bottom:"20px",
+                        boxShadow: "1px 1px 1px rgba(0, 0, 0, 0.2)",
+                        cursor:"pointer"}}>Confirm</button>
         </WindowsAlert>
     }
 
@@ -161,6 +175,7 @@ function Desktop() {
             </button>
             <Animation1/>
             <Animation2/>
+            <Animation3/>
         </div>
     )
 }
