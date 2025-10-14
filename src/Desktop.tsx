@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import defaultBackground from "./images/default_background.jpeg";
 import "./Desktop.css"
+import { LinearProgress } from "@mui/material";
 
 function Desktop() {
     // const [screenHeight,setScreenHeight] = useState(window.innerHeight)
@@ -13,8 +14,9 @@ function Desktop() {
     const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
 
     const [showLoad, setShowLoad] = useState(false)
+    const [progress, setProgress] = useState(70)
     const [showAnimation1, setShowAnimation1] = useState(false)
-    const [showAnimation2, setShowAnimation2] = useState(false)
+    const [showAnimation2, setShowAnimation2] = useState(true)
 
     const dialog1Options = [
         "You failed to open the application.",
@@ -105,9 +107,19 @@ function Desktop() {
     }
 
     const Animation2 = () => {
+        useEffect(() => {
+            const timer = setInterval(() => {
+                setShowAnimation2(false);
+            }, 10000);
+
+            return () => {
+                clearInterval(timer);
+            };
+        }, [])
         return <WindowsAlert handleClose={handleCloseAnimation2} show={showAnimation2}>
             <div className="progress">
                 <div className="progress_inner"></div>
+                <div className="progress_right"></div>
             </div>
         </WindowsAlert>
     }
