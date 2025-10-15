@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import defaultBackground from "./images/default_background.jpeg";
 import "./Desktop.css"
+import "./ClickCaptcha.css"
 
 function Desktop() {
     // const [screenHeight,setScreenHeight] = useState(window.innerHeight)
@@ -13,9 +14,11 @@ function Desktop() {
     const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
 
     const [showLoad, setShowLoad] = useState(false)
+    const [showOnce, setShowOnce] = useState(true)
     const [showAnimation1, setShowAnimation1] = useState(false)
     const [showAnimation2, setShowAnimation2] = useState(false)
     const [showAnimation3, setShowAnimation3] = useState(false)
+    const [showAnimation4, setShowAnimation4] = useState(true)
 
     const dialog1Options = [
         "You failed to open the application.",
@@ -29,7 +32,10 @@ function Desktop() {
         setShowLoad(false)
         if (animation1Counter+1 >= dialog1Options.length) {
             setAnimation1Counter(0)
-            setShowAnimation2(true)
+            if (!showOnce)
+                setShowAnimation2(true)
+            else
+                setShowOnce(false)
         } else {
             setAnimation1Counter(animation1Counter+1)
             setShowAnimation1(true)
@@ -41,11 +47,26 @@ function Desktop() {
         setShowLoad(true)
         await sleep(1000)
         setShowLoad(false)
-        setShowAnimation3(true);
+        if (!showOnce)
+            setShowAnimation3(true)
+        else
+            setShowOnce(false)
     }
 
     const handleCloseAnimation3 = async () => {
         setShowAnimation3(false)
+        setShowLoad(true)
+        await sleep(1000)
+        setShowLoad(false)
+        if (!showOnce)
+            setShowAnimation4(true)
+        else
+            setShowOnce(false)
+    }
+
+    const handleCloseAnimation4 = async () => {
+        await sleep(3500)
+        setShowAnimation4(false)
         setShowLoad(true)
         await sleep(1000)
         setShowLoad(false)
@@ -145,6 +166,38 @@ function Desktop() {
         </WindowsAlert>
     }
 
+    const Captcha = (props: any) => {
+        return <div>
+            {props.children}
+        </div>
+    }
+
+    const ClickCaptcha = () => {
+        return <div className="captcha">
+            <div className="spinner">
+                <label>
+                    <input type="checkbox" onClick={()=>{"$(this).attr('disabled','disabled');"; handleCloseAnimation4()}}/>
+                    <span className="checkmark"><span>&nbsp;</span></span>
+                </label>
+            </div>
+            <div className="text">
+                I'm not a robot
+            </div>
+            <div className="logo">
+                <img src={require("./images/RecaptchaLogo.png")}/>
+                <small>Privacy - Terms</small>
+            </div>
+        </div>
+    }
+
+    const Animation4 = () => {
+        return <WindowsAlert handleClose={handleCloseAnimation4} show={showAnimation4}> 
+            <Captcha>
+                <ClickCaptcha/>
+            </Captcha>
+        </WindowsAlert>
+    }
+
     // Uncomment below section if purchased PixelLab tokens
     // useEffect(() => {
     //     try {
@@ -176,6 +229,7 @@ function Desktop() {
             <Animation1/>
             <Animation2/>
             <Animation3/>
+            <Animation4/>
         </div>
     )
 }
