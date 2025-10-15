@@ -19,6 +19,7 @@ function Desktop() {
     const [showAnimation2, setShowAnimation2] = useState(false)
     const [showAnimation3, setShowAnimation3] = useState(false)
     const [showAnimation4, setShowAnimation4] = useState(true)
+    const [showAlert, setShowAlert] = useState(false)
 
     const dialog1Options = [
         "You failed to open the application.",
@@ -72,7 +73,11 @@ function Desktop() {
         setShowLoad(false)
     }
 
-    const WindowsAlert: React.FC<any> = ({handleClose, show, children}) => {
+    const handleCloseAlert = () => {
+        setShowAlert(false)
+    }
+
+    const WindowsAlert: React.FC<any> = ({handleClose, handleForceClose, show, children}) => {
         return <dialog 
         open={show} 
         onClose={() => handleClose()}
@@ -100,7 +105,7 @@ function Desktop() {
                     border:"1px solid grey",
                     borderRadius:"3px",
                     background:"linear-gradient(to bottom, #ffdedeff, #ab5151ff)",
-                    color:"white"}} onClick={() => handleClose()}>X</div>
+                    color:"white"}} onClick={handleForceClose}>X</div>
             </div>
             <div style={{
                 border:"1px solid grey",
@@ -117,7 +122,7 @@ function Desktop() {
     }
     
     const Animation1 = () => {
-        return <WindowsAlert handleClose={handleCloseAnimation1} show={showAnimation1}>
+        return <WindowsAlert handleClose={handleCloseAnimation1} handleForceClose={handleCloseAnimation1} show={showAnimation1}>
             <div style={{width:"100%"}}>{dialog1Options[animation1Counter]}</div>
             <button onClick={() => handleCloseAnimation1()} 
                     style={{
@@ -139,7 +144,7 @@ function Desktop() {
                 clearInterval(timer);
             };
         }, [])
-        return <WindowsAlert handleClose={handleCloseAnimation2} show={showAnimation2}>
+        return <WindowsAlert handleClose={handleCloseAnimation2} handleForceClose={handleCloseAnimation2} show={showAnimation2}>
             <div style={{display:"flex",flexDirection:"column"}}>
                 <div>Please wait while the application is fetching server 2.</div>
                 <div className="progress">
@@ -151,7 +156,7 @@ function Desktop() {
     }
 
     const Animation3 = () => {
-        return <WindowsAlert handleClose={handleCloseAnimation3} show={showAnimation3}>
+        return <WindowsAlert handleClose={handleCloseAnimation3} handleForceClose={handleCloseAnimation3} show={showAnimation3}>
             <div style={{display:"flex",flexDirection:"column",width:"100%"}}>
                 <div>Please enter your password:</div>
                 <input type="password"/>
@@ -191,11 +196,37 @@ function Desktop() {
     }
 
     const Animation4 = () => {
-        return <WindowsAlert handleClose={handleCloseAnimation4} show={showAnimation4}> 
+        return <WindowsAlert handleClose={handleCloseAlert} handleForceClose={()=>{setShowAlert(true) }} show={showAnimation4}> 
             <Captcha>
                 <ClickCaptcha/>
             </Captcha>
         </WindowsAlert>
+    }
+
+    const Alert = () => {
+        return <div
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                zIndex: 1000
+            }}>
+            <WindowsAlert handleClose={handleCloseAlert} handleForceClose={handleCloseAlert} show={showAlert}>
+                <div>
+                    Please complete the Captcha first.
+                </div>
+                <button onClick={handleCloseAlert} 
+                    style={{
+                        position:"absolute",
+                        height:"fit-content",
+                        bottom:"20px",
+                        boxShadow: "1px 1px 1px rgba(0, 0, 0, 0.2)",
+                        cursor:"pointer"}}>Ok</button>
+            </WindowsAlert>
+        </div>
     }
 
     // Uncomment below section if purchased PixelLab tokens
@@ -230,6 +261,7 @@ function Desktop() {
             <Animation2/>
             <Animation3/>
             <Animation4/>
+            {showAlert && <Alert/>}
         </div>
     )
 }
