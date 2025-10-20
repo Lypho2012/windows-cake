@@ -134,11 +134,11 @@ function Desktop() {
             flexDirection:"column",
             justifyContent: "center",
             cursor: showLoad ? 'wait' : 'default'}}>
-            <Application triggerAnimation={triggerAnimations} imgSrc={require("./images/gift.png")} applicationClass={"gift-box"} width={"150px"}/>
-            <Application triggerAnimation={triggerAnimation1} imgSrc={require("./images/warning.png")} applicationClass={"animation1"} width={"100px"} margin={"25px"}/>
-            <Application triggerAnimation={triggerAnimation2} imgSrc={require("./images/loading.png")} applicationClass={"animation2"} width={"100px"} margin={"25px"}/>
-            <Application triggerAnimation={triggerAnimation3} imgSrc={require("./images/password.png")} applicationClass={"animation3"} width={"100px"} margin={"25px"}/>
-            <Application triggerAnimation={triggerAnimation4} imgSrc={require("./images/shield.png")} applicationClass={"animation4"} width={"80px"} margin={"37px"}/>
+            <Application x={Math.floor(Math.random()*(window.innerWidth-150))} y={Math.floor(Math.random()*(window.innerHeight-150))} triggerAnimation={triggerAnimations} imgSrc={require("./images/gift.png")} applicationClass={"gift-box"} width={"150px"}/>
+            <Application x={20} y={20} triggerAnimation={triggerAnimation1} imgSrc={require("./images/warning.png")} applicationClass={"animation1"} width={"100px"} margin={"25px"}/>
+            <Application x={20} y={200} triggerAnimation={triggerAnimation2} imgSrc={require("./images/loading.png")} applicationClass={"animation2"} width={"100px"} margin={"25px"}/>
+            <Application x={20} y={400} triggerAnimation={triggerAnimation3} imgSrc={require("./images/password.png")} applicationClass={"animation3"} width={"100px"} margin={"25px"}/>
+            <Application x={20} y={600} triggerAnimation={triggerAnimation4} imgSrc={require("./images/shield.png")} applicationClass={"animation4"} width={"80px"} margin={"37px"}/>
             <Animation1 handleClose={handleCloseAnimation1} dialogOptions={dialog1Options} dialogCounter={animation1Counter} showDialog={showAnimation1}/>
             <Animation2 handleClose={handleCloseAnimation2} showAnimation={showAnimation2}/>
             <Animation3 handleClose={handleCloseAnimation3} showAnimation={showAnimation3}/>

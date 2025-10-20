@@ -1,8 +1,6 @@
 import { useState } from "react"
 
 const Application = (props: any) => {
-    const [x] = useState(Math.floor(Math.random()*(window.innerWidth-150)))
-    const [y] = useState(Math.floor(Math.random()*(window.innerHeight-150)))
     const [clickedApplication, setClickedApplication] = useState(false)
     const handleClick = (event: any) => {
         if (event.target.className != props.applicationClass) {
@@ -17,14 +15,14 @@ const Application = (props: any) => {
             width:"140px",
             height:"140px",
             position:"fixed",
-            left:`${x+10}px`,
-            top:`${y+10}px`} : {}}>
+            left:`${props.x+10}px`,
+            top:`${props.y+10}px`} : {}}>
             <button className={props.applicationClass} style={{
                 background:"none",
                 border:"none",
                 position:"fixed",
-                left:`${x}px`,
-                top:`${y}px`,
+                left:`${props.x}px`,
+                top:`${props.y}px`,
                 margin:props.margin}}>
                 <img className={props.applicationClass} src={props.imgSrc} 
                     style={{width:props.width,cursor:'pointer'}} 
