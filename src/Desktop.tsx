@@ -101,8 +101,28 @@ function Desktop() {
     //         console.error(error);
     //     }
     // },[])
-    const triggerAnimation = () => {
+    const triggerAnimations = () => {
         setShowAnimation1(true)
+    }
+
+    const triggerAnimation1 = () => {
+        setShowOnce(true)
+        setShowAnimation1(true)
+    }
+
+    const triggerAnimation2 = () => {
+        setShowOnce(true)
+        setShowAnimation2(true)
+    }
+
+    const triggerAnimation3 = () => {
+        setShowOnce(true)
+        setShowAnimation3(true)
+    }
+
+    const triggerAnimation4 = () => {
+        setShowOnce(true)
+        setShowAnimation4(true)
     }
 
     return (
@@ -114,7 +134,11 @@ function Desktop() {
             flexDirection:"column",
             justifyContent: "center",
             cursor: showLoad ? 'wait' : 'default'}}>
-            <Application triggerAnimation={triggerAnimation} imgSrc={require("./images/gift.png")} applicationClass={"gift-box"}/>
+            <Application triggerAnimation={triggerAnimations} imgSrc={require("./images/gift.png")} applicationClass={"gift-box"} width={"150px"}/>
+            <Application triggerAnimation={triggerAnimation1} imgSrc={require("./images/warning.png")} applicationClass={"animation1"} width={"100px"} margin={"25px"}/>
+            <Application triggerAnimation={triggerAnimation2} imgSrc={require("./images/loading.png")} applicationClass={"animation2"} width={"100px"} margin={"25px"}/>
+            <Application triggerAnimation={triggerAnimation3} imgSrc={require("./images/password.png")} applicationClass={"animation3"} width={"100px"} margin={"25px"}/>
+            <Application triggerAnimation={triggerAnimation4} imgSrc={require("./images/shield.png")} applicationClass={"animation4"} width={"80px"} margin={"37px"}/>
             <Animation1 handleClose={handleCloseAnimation1} dialogOptions={dialog1Options} dialogCounter={animation1Counter} showDialog={showAnimation1}/>
             <Animation2 handleClose={handleCloseAnimation2} showAnimation={showAnimation2}/>
             <Animation3 handleClose={handleCloseAnimation3} showAnimation={showAnimation3}/>

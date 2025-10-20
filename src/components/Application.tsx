@@ -24,9 +24,10 @@ const Application = (props: any) => {
                 border:"none",
                 position:"fixed",
                 left:`${x}px`,
-                top:`${y}px`}}>
+                top:`${y}px`,
+                margin:props.margin}}>
                 <img className={props.applicationClass} src={props.imgSrc} 
-                    style={{width:'150px',cursor:'pointer'}} 
+                    style={{width:props.width,cursor:'pointer'}} 
                     onClick={()=>setClickedApplication(true)} 
                     onDoubleClick={props.triggerAnimation}/>
             </button>
