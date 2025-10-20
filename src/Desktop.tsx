@@ -8,17 +8,14 @@ import Animation1 from "./components/Animation1";
 import Animation2 from "./components/Animation2";
 import Animation3 from "./components/Animation3";
 import Alert from "./components/Alert";
+import Application from "./components/Application";
 
 function Desktop() {
     // const [screenHeight,setScreenHeight] = useState(window.innerHeight)
     // const [screenWidth,setScreenWidth] = useState(window.innerWidth)
-    const [giftX] = useState(Math.floor(Math.random()*(window.innerWidth-150)))
-    const [giftY] = useState(Math.floor(Math.random()*(window.innerHeight-150)))
     const [backgroundImage,setBackgroundImage] = useState(defaultBackground)
 
     const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
-
-    const [clickedGiftApplication, setClickedGiftApplication] = useState(false)
 
     const [showLoad, setShowLoad] = useState(false)
     const [showOnce, setShowOnce] = useState(false)
@@ -108,13 +105,6 @@ function Desktop() {
         setShowAnimation1(true)
     }
 
-    const handleClick = (event: any) => {
-        if (event.target.id != "gift-box-button" && event.target.id != "gift-box-img") {
-            console.log(event.target.id)
-            setClickedGiftApplication(false)
-        }
-    }
-    window.addEventListener('click',handleClick)
     return (
         <div id="desktop-div" style={{
             backgroundImage: `url(${backgroundImage})`, 
@@ -124,23 +114,7 @@ function Desktop() {
             flexDirection:"column",
             justifyContent: "center",
             cursor: showLoad ? 'wait' : 'default'}}>
-            <div style={clickedGiftApplication ? {
-                border:"1px solid rgba(35, 54, 255, 1)",
-                backgroundColor:"rgba(3, 133, 255, 0.5)",
-                width:"140px",
-                height:"140px",
-                position:"fixed",
-                left:`${giftX+10}px`,
-                top:`${giftY+10}px`} : {}}>
-                <button id="gift-box-button" style={{
-                    background:"none",
-                    border:"none",
-                    position:"fixed",
-                    left:`${giftX}px`,
-                    top:`${giftY}px`}}>
-                    <img id="gift-box-img" src={require("./images/gift.png")} alt='gift box' style={{width:'150px',cursor:'pointer'}} onClick={()=>setClickedGiftApplication(true)} onDoubleClick={triggerAnimation}/>
-                </button>
-            </div>
+            <Application triggerAnimation={triggerAnimation} imgSrc={require("./images/gift.png")} applicationClass={"gift-box"}/>
             <Animation1 handleClose={handleCloseAnimation1} dialogOptions={dialog1Options} dialogCounter={animation1Counter} showDialog={showAnimation1}/>
             <Animation2 handleClose={handleCloseAnimation2} showAnimation={showAnimation2}/>
             <Animation3 handleClose={handleCloseAnimation3} showAnimation={showAnimation3}/>
