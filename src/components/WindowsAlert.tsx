@@ -34,8 +34,10 @@ const WindowsAlert: React.FC<any> = ({handleClose, handleForceClose, show, child
             display:"flex",
             justifyContent: "center",
             marginTop:"10px",
-            height:"200px",
-            width:"350px",
+            minHeight:"50px",
+            minWidth:"50px",
+            maxWidth:"500px",
+            paddingBottom:"30px",
             background:"white",
             padding: "10px"}}>
             {children}
