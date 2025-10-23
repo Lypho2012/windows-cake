@@ -32,6 +32,9 @@ function Desktop() {
         "The process failed. Try again.",
         "Attempting to access using server 2."]
     const [animation1Counter, setAnimation1Counter] = useState(0)
+
+    const [selectedImages, setSelectedImages] = useState(Array(3).fill(Array(3).fill(false)))
+
     const handleCloseAnimation1 = async () => {
         setShowAnimation1(false)
         setShowLoad(true)
@@ -84,12 +87,12 @@ function Desktop() {
         setShowAlert(false)
     }
 
-    const handleCloseAnimation5 = async () => {
-        await sleep(3500)
+    const handleCloseAnimation5 = async (res:any) => {
         setShowAnimation5(false)
         setShowLoad(true)
         await sleep(1000)
         setShowLoad(false)
+        setSelectedImages(res)
     }
 
     const Animation4 = () => {

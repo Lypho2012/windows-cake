@@ -10,6 +10,7 @@ const Animation5 = (props: any) => {
             row.map((selected:any, c:any) => r==i && c==j ? !selected : selected)
         ))
     }
+    
     return <WindowsAlert handleClose={props.handleClose} handleForceClose={props.handleClose} show={props.showAnimation}>
         <div style={{display:"flex",flexDirection:"column"}}>
             <div style={{
@@ -37,7 +38,7 @@ const Animation5 = (props: any) => {
                                     paddingRight:"10px",
                                     paddingBottom:"5px",
                                     cursor:"pointer"}}>
-                                    {selectedImages[i][j] ? 
+                                    {!selectedImages[i][j] ? 
                                     <img src={require(`../images/captcha${i*3+j+1}.png`)}
                                     style={{width:"130px"}} onClick={()=>handleSelectImage(i,j)}/>:
                                     <div>
@@ -53,6 +54,11 @@ const Animation5 = (props: any) => {
                     ))
                 }
             </div>
+            <button style={{width:"100px",height:'40px',color:"white",
+                fontFamily: "Arial, Helvetica, sans-serif",backgroundColor:"rgb(56,114,226)",
+                border:"none",marginLeft:"auto",cursor:"pointer"}} onClick={()=>props.handleClose(selectedImages)}>
+                VERIFY
+            </button>
         </div>
     </WindowsAlert>
 }
