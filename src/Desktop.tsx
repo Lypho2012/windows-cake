@@ -9,6 +9,7 @@ import Animation2 from "./components/Animation2";
 import Animation3 from "./components/Animation3";
 import Alert from "./components/Alert";
 import Application from "./components/Application";
+import Animation5 from "./components/Animation5";
 
 function Desktop() {
     // const [screenHeight,setScreenHeight] = useState(window.innerHeight)
@@ -24,6 +25,7 @@ function Desktop() {
     const [showAnimation3, setShowAnimation3] = useState(false)
     const [showAnimation4, setShowAnimation4] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
+    const [showAnimation5, setShowAnimation5] = useState(false)
 
     const dialog1Options = [
         "You failed to open the application.",
@@ -75,16 +77,19 @@ function Desktop() {
         setShowLoad(true)
         await sleep(1000)
         setShowLoad(false)
+        setShowAnimation5(false)
     }
 
     const handleCloseAlert = () => {
         setShowAlert(false)
     }
 
-    const Captcha = () => {
-        return <div>
-            
-        </div>
+    const handleCloseAnimation5 = async () => {
+        await sleep(3500)
+        setShowAnimation5(false)
+        setShowLoad(true)
+        await sleep(1000)
+        setShowLoad(false)
     }
 
     const Animation4 = () => {
@@ -125,6 +130,11 @@ function Desktop() {
         setShowAnimation4(true)
     }
 
+    const triggerAnimation5 = () => {
+        setShowOnce(true)
+        setShowAnimation5(true)
+    }
+
     return (
         <div id="desktop-div" style={{
             backgroundImage: `url(${backgroundImage})`, 
@@ -139,11 +149,13 @@ function Desktop() {
             <Application x={20} y={200} triggerAnimation={triggerAnimation2} imgSrc={require("./images/loading.png")} applicationClass={"animation2"} width={"100px"} margin={"25px"}/>
             <Application x={20} y={400} triggerAnimation={triggerAnimation3} imgSrc={require("./images/password.png")} applicationClass={"animation3"} width={"100px"} margin={"25px"}/>
             <Application x={20} y={600} triggerAnimation={triggerAnimation4} imgSrc={require("./images/shield.png")} applicationClass={"animation4"} width={"80px"} margin={"37px"}/>
+            <Application x={20} y={800} triggerAnimation={triggerAnimation5} imgSrc={require("./images/image_folder.png")} applicationClass={"animation5"} width={"80px"} margin={"37px"}/>
             <Animation1 handleClose={handleCloseAnimation1} dialogOptions={dialog1Options} dialogCounter={animation1Counter} showDialog={showAnimation1}/>
             <Animation2 handleClose={handleCloseAnimation2} showAnimation={showAnimation2}/>
             <Animation3 handleClose={handleCloseAnimation3} showAnimation={showAnimation3}/>
             <Animation4/>
             {showAlert && showAnimation4 && <Alert handleCloseAlert={handleCloseAlert} showAlert={showAlert}/>}
+            <Animation5 handleClose={handleCloseAnimation5} showAnimation={showAnimation5}/>
         </div>
     )
 }

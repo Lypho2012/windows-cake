@@ -35,7 +35,7 @@ const WindowsAlert: React.FC<any> = ({handleClose, handleForceClose, show, child
             justifyContent: "center",
             marginTop:"10px",
             minHeight:"50px",
-            minWidth:"50px",
+            minWidth:"300px",
             maxWidth:"500px",
             paddingBottom:"30px",
             background:"white",
