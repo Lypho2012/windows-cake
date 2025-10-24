@@ -23,7 +23,8 @@ const Application = (props: any) => {
                 position:"fixed",
                 left:`${props.x}px`,
                 top:`${props.y}px`,
-                margin:props.margin}}>
+                marginLeft:props.marginLeft,
+                marginTop:props.marginTop}}>
                 <img className={props.applicationClass} src={props.imgSrc} 
                     style={{width:props.width,cursor:'pointer'}} 
                     onClick={()=>setClickedApplication(true)} 

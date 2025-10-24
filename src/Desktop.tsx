@@ -10,6 +10,7 @@ import Animation3 from "./components/Animation3";
 import Alert from "./components/Alert";
 import Application from "./components/Application";
 import Animation5 from "./components/Animation5";
+import Animation6 from "./components/Animation6";
 
 function Desktop() {
     // const [screenHeight,setScreenHeight] = useState(window.innerHeight)
@@ -26,6 +27,7 @@ function Desktop() {
     const [showAnimation4, setShowAnimation4] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
     const [showAnimation5, setShowAnimation5] = useState(false)
+    const [showAnimation6, setShowAnimation6] = useState(false)
 
     const dialog1Options = [
         "You failed to open the application.",
@@ -80,7 +82,10 @@ function Desktop() {
         setShowLoad(true)
         await sleep(1000)
         setShowLoad(false)
-        setShowAnimation5(false)
+        if (!showOnce)
+            setShowAnimation5(true)
+        else
+            setShowOnce(false)
     }
 
     const handleCloseAlert = () => {
@@ -93,6 +98,17 @@ function Desktop() {
         await sleep(1000)
         setShowLoad(false)
         setSelectedImages(res)
+        if (!showOnce)
+            setShowAnimation6(true)
+        else
+            setShowOnce(false)
+    }
+
+    const handleCloseAnimation6 = async (res:any) => {
+        setShowAnimation6(false)
+        setShowLoad(true)
+        await sleep(1000)
+        setShowLoad(false)
     }
 
     const Animation4 = () => {
@@ -138,6 +154,11 @@ function Desktop() {
         setShowAnimation5(true)
     }
 
+    const triggerAnimation6 = () => {
+        setShowOnce(true)
+        setShowAnimation6(true)
+    }
+
     return (
         <div id="desktop-div" style={{
             backgroundImage: `url(${backgroundImage})`, 
@@ -148,17 +169,20 @@ function Desktop() {
             justifyContent: "center",
             cursor: showLoad ? 'wait' : 'default'}}>
             <Application x={Math.floor(Math.random()*(window.innerWidth-150))} y={Math.floor(Math.random()*(window.innerHeight-150))} triggerAnimation={triggerAnimations} imgSrc={require("./images/gift.png")} applicationClass={"gift-box"} width={"150px"}/>
-            <Application x={20} y={20} triggerAnimation={triggerAnimation1} imgSrc={require("./images/warning.png")} applicationClass={"animation1"} width={"100px"} margin={"25px"}/>
-            <Application x={20} y={200} triggerAnimation={triggerAnimation2} imgSrc={require("./images/loading.png")} applicationClass={"animation2"} width={"100px"} margin={"25px"}/>
-            <Application x={20} y={400} triggerAnimation={triggerAnimation3} imgSrc={require("./images/password.png")} applicationClass={"animation3"} width={"100px"} margin={"25px"}/>
-            <Application x={20} y={600} triggerAnimation={triggerAnimation4} imgSrc={require("./images/shield.png")} applicationClass={"animation4"} width={"80px"} margin={"37px"}/>
-            <Application x={20} y={800} triggerAnimation={triggerAnimation5} imgSrc={require("./images/image_folder.png")} applicationClass={"animation5"} width={"80px"} margin={"37px"}/>
+            <Application x={20} y={20} triggerAnimation={triggerAnimation1} imgSrc={require("./images/warning.png")} applicationClass={"animation1"} width={"100px"} marginLeft={"25px"} marginTop={"25px"}/>
+            <Application x={20} y={120} triggerAnimation={triggerAnimation2} imgSrc={require("./images/loading.png")} applicationClass={"animation2"} width={"100px"} marginLeft={"25px"} marginTop={"30px"}/>
+            <Application x={20} y={200} triggerAnimation={triggerAnimation3} imgSrc={require("./images/password.png")} applicationClass={"animation3"} width={"100px"} marginLeft={"25px"} marginTop={"25px"}/>
+            <Application x={20} y={300} triggerAnimation={triggerAnimation4} imgSrc={require("./images/shield.png")} applicationClass={"animation4"} width={"80px"} marginLeft={"37px"} marginTop={"37px"}/>
+            <Application x={20} y={400} triggerAnimation={triggerAnimation5} imgSrc={require("./images/image_folder.png")} applicationClass={"animation5"} width={"80px"} marginLeft={"37px"} marginTop={"37px"}/>
+            <Application x={20} y={520} triggerAnimation={triggerAnimation6} imgSrc={require("./images/cake.png")} applicationClass={"animation6"} width={"200px"} marginLeft={"-20px"}/>
+
             <Animation1 handleClose={handleCloseAnimation1} dialogOptions={dialog1Options} dialogCounter={animation1Counter} showDialog={showAnimation1}/>
             <Animation2 handleClose={handleCloseAnimation2} showAnimation={showAnimation2}/>
             <Animation3 handleClose={handleCloseAnimation3} showAnimation={showAnimation3}/>
             <Animation4/>
             {showAlert && showAnimation4 && <Alert handleCloseAlert={handleCloseAlert} showAlert={showAlert}/>}
             <Animation5 handleClose={handleCloseAnimation5} showAnimation={showAnimation5}/>
+            <Animation6 handleClose={handleCloseAnimation6} showAnimation={showAnimation6} selectedImages={selectedImages}/>
         </div>
     )
 }

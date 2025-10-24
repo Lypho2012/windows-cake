@@ -56,7 +56,12 @@ const Animation5 = (props: any) => {
             </div>
             <button style={{width:"100px",height:'40px',color:"white",
                 fontFamily: "Arial, Helvetica, sans-serif",backgroundColor:"rgb(56,114,226)",
-                border:"none",marginLeft:"auto",cursor:"pointer"}} onClick={()=>props.handleClose(selectedImages)}>
+                border:"none",marginLeft:"auto",cursor:"pointer"}} 
+                onClick={()=> {
+                    const res = selectedImages
+                    setSelectedImages(Array(3).fill(Array(3).fill(false)))
+                    props.handleClose(res)
+                }}>
                 VERIFY
             </button>
         </div>
