@@ -8,8 +8,8 @@ const Animation6 = (props: any) => {
     const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
     const [animationRan, setAnimationRan] = useState(false)
 
-    const [showCakes,setShowCakes] = useState(Array(9).fill(true))
-    const [showCandles,setShowCandles] = useState(Array(9).fill(true))
+    const [showCakes,setShowCakes] = useState(Array(9).fill(false))
+    const [showCandles,setShowCandles] = useState(Array(5).fill(false))
     const Cake1 = (useImage: any) => {
         return <ColorfulAlert show={showCakes[0]} background={"rgb(181,226,247)"} x={relativeX-25} y={relativeY+20}>
             {
@@ -18,35 +18,35 @@ const Animation6 = (props: any) => {
         </ColorfulAlert>
     }
     const Cake2 = (useImage: any) => {
-        return <ColorfulAlert show={showCakes[0]} background={"rgb(255,253,206)"} x={relativeX-20} y={relativeY-10}>
+        return <ColorfulAlert show={showCakes[1]} background={"rgb(255,253,206)"} x={relativeX-20} y={relativeY-10}>
             {
                 useImage ? <img style={{width:"400px"}} src={require("../images/cake2.png")}/> : <></>
             }
         </ColorfulAlert>
     }
     const Cake3 = (useImage: any) => {
-        return <ColorfulAlert show={showCakes[0]} background={"rgb(253,228,225)"} x={relativeX-15} y={relativeY+25}>
+        return <ColorfulAlert show={showCakes[2]} background={"rgb(253,228,225)"} x={relativeX-15} y={relativeY+25}>
             {
                 useImage ? <img style={{width:"300px"}} src={require("../images/cake3.png")}/> : <></>
             }
         </ColorfulAlert>
     }
     const Cake4 = (useImage: any) => {
-        return <ColorfulAlert show={showCakes[0]} background={"rgb(245,224,178)"} x={relativeX} y={relativeY+10}>
+        return <ColorfulAlert show={showCakes[3]} background={"rgb(245,224,178)"} x={relativeX} y={relativeY+10}>
             {
                 useImage ? <img style={{width:"200px"}} src={require("../images/cake4.png")}/> : <></>
             }
         </ColorfulAlert>
     }
     const Cake5 = (useImage: any) => {
-        return <ColorfulAlert show={showCakes[0]} background={"rgb(254,174,189)"} x={relativeX-27} y={relativeY+10}>
+        return <ColorfulAlert show={showCakes[4]} background={"rgb(254,174,189)"} x={relativeX-27} y={relativeY+10}>
             {
                 useImage ? <img style={{width:"200px"}} src={require("../images/cake5.png")}/> : <></>
             }
         </ColorfulAlert>
     }
     const Cake6 = (useImage: any) => {
-        return <ColorfulAlert show={showCakes[0]} background={"rgb(251,209,147)"} x={relativeX-15} y={relativeY-15}>
+        return <ColorfulAlert show={showCakes[5]} background={"rgb(251,209,147)"} x={relativeX-15} y={relativeY-15}>
             {
                 useImage ? <img style={{width:"450px"}} src={require("../images/cake6.png")}/> : <></>
             }
@@ -54,21 +54,21 @@ const Animation6 = (props: any) => {
     }
 
     const Cake7 = (useImage: any) => {
-        return <ColorfulAlert show={showCakes[0]} background={"rgb(253,237,237)"} x={relativeX-13.5} y={relativeY-35}>
+        return <ColorfulAlert show={showCakes[6]} background={"rgb(253,237,237)"} x={relativeX-13.5} y={relativeY-35}>
             {
                 useImage ? <img style={{width:"400px"}} src={require("../images/cake7.png")}/> : <></>
             }
         </ColorfulAlert>
     }
     const Cake8 = (useImage: any) => {
-        return <ColorfulAlert show={showCakes[0]} background={"rgb(254,214,196)"} x={relativeX+8} y={relativeY+5}>
+        return <ColorfulAlert show={showCakes[7]} background={"rgb(254,214,196)"} x={relativeX+8} y={relativeY+5}>
             {
                 useImage ? <img style={{width:"220px"}} src={require("../images/cake8.png")}/> : <></>
             }
         </ColorfulAlert>
     }
     const Cake9 = (useImage: any) => {
-        return <ColorfulAlert show={showCakes[0]} background={"rgb(250,198,114)"} x={relativeX-9.5} y={relativeY-48}>
+        return <ColorfulAlert show={showCakes[8]} background={"rgb(250,198,114)"} x={relativeX-9.5} y={relativeY-48}>
             {
                 useImage ? <img style={{width:"260px"}} src={require("../images/cake9.png")}/> : <></>
             }
@@ -76,35 +76,35 @@ const Animation6 = (props: any) => {
     }
 
     const Candle1 = () => {
-        return <ColorfulAlert show={showCandles[0]} background={"rgb(255,244,156)"} x={relativeX-15} y={relativeY-40}>
-            {
-                <img style={{width:"50px"}} src={require("../images/candle.png")}/>
-            }
-        </ColorfulAlert>
-    }
-    const Candle2 = () => {
-        return <ColorfulAlert show={showCandles[0]} background={"rgb(255,244,156)"} x={relativeX+8} y={relativeY-40}>
-            {
-                <img style={{width:"50px"}} src={require("../images/candle.png")}/>
-            }
-        </ColorfulAlert>
-    }
-    const Candle3 = () => {
         return <ColorfulAlert show={showCandles[0]} background={"rgb(255,244,156)"} x={relativeX-22} y={relativeY-10}>
             {
                 <img style={{width:"50px"}} src={require("../images/candle.png")}/>
             }
         </ColorfulAlert>
     }
+    const Candle2 = () => {
+        return <ColorfulAlert show={showCandles[1]} background={"rgb(255,244,156)"} x={relativeX+14} y={relativeY-10}>
+            {
+                <img style={{width:"50px"}} src={require("../images/candle.png")}/>
+            }
+        </ColorfulAlert>
+    }
+    const Candle3 = () => {
+        return <ColorfulAlert show={showCandles[2]} background={"rgb(255,244,156)"} x={relativeX-15} y={relativeY-40}>
+            {
+                <img style={{width:"50px"}} src={require("../images/candle.png")}/>
+            }
+        </ColorfulAlert>
+    }
     const Candle4 = () => {
-        return <ColorfulAlert show={showCandles[0]} background={"rgb(255,244,156)"} x={relativeX+14} y={relativeY-10}>
+        return <ColorfulAlert show={showCandles[3]} background={"rgb(255,244,156)"} x={relativeX+8} y={relativeY-40}>
             {
                 <img style={{width:"50px"}} src={require("../images/candle.png")}/>
             }
         </ColorfulAlert>
     }
     const Candle5 = () => {
-        return <ColorfulAlert show={showCandles[0]} background={"rgb(255,244,156)"} x={relativeX-3} y={relativeY-55}>
+        return <ColorfulAlert show={showCandles[4]} background={"rgb(255,244,156)"} x={relativeX-3} y={relativeY-55}>
             {
                 <img style={{width:"50px"}} src={require("../images/candle.png")}/>
             }
@@ -113,16 +113,21 @@ const Animation6 = (props: any) => {
 
     const runAnimation = async () => {
         for (let i=0; i<9; i++) {
-            setShowCakes(showCakes.map((_,j) => i == j ? true : false))
-            console.log(i)
+            setShowCakes(showCakes.map((_,j) => i >= j ? true : false))
             await sleep(1000)
         }
+        for (let i=0; i<5; i++) {
+            setShowCandles(showCandles.map((_,j) => i >= j ? true : false))
+            await sleep(1000)
+        }
+        setShowCakes(Array(9).fill(false))
+        setShowCandles(Array(5).fill(false))
         props.handleClose()
         setAnimationRan(false)
     }
     if (props.showAnimation && !animationRan){
         setAnimationRan(true)
-        // runAnimation()
+        runAnimation()
     }
     return (
         <div style={{width:"100%",height:"100%"}}>
