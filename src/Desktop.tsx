@@ -92,7 +92,12 @@ function Desktop() {
         setShowAlert(false)
     }
 
+    const handleShowAlert = () => {
+        setShowAlert(true)
+    }
+
     const handleCloseAnimation5 = async (res:any) => {
+        handleCloseAlert()
         setShowAnimation5(false)
         setShowLoad(true)
         await sleep(1000)
@@ -104,7 +109,7 @@ function Desktop() {
             setShowOnce(false)
     }
 
-    const handleCloseAnimation6 = async (res:any) => {
+    const handleCloseAnimation6 = async () => {
         setShowAnimation6(false)
         setShowLoad(true)
         await sleep(1000)
@@ -112,7 +117,7 @@ function Desktop() {
     }
 
     const Animation4 = () => {
-        return <WindowsAlert handleClose={handleCloseAlert} handleForceClose={()=>{setShowAlert(true) }} show={showAnimation4}> 
+        return <WindowsAlert handleClose={handleCloseAlert} handleForceClose={handleShowAlert} show={showAnimation4}> 
             <ClickCaptcha handleCloseCaptcha={handleCloseAnimation4}/>
         </WindowsAlert>
     }
@@ -180,8 +185,8 @@ function Desktop() {
             <Animation2 handleClose={handleCloseAnimation2} showAnimation={showAnimation2}/>
             <Animation3 handleClose={handleCloseAnimation3} showAnimation={showAnimation3}/>
             <Animation4/>
-            {showAlert && showAnimation4 && <Alert handleCloseAlert={handleCloseAlert} showAlert={showAlert}/>}
-            <Animation5 handleClose={handleCloseAnimation5} showAnimation={showAnimation5}/>
+            {showAlert && (showAnimation4 || showAnimation5) && <Alert handleCloseAlert={handleCloseAlert} showAlert={showAlert}/>}
+            <Animation5 handleClose={handleCloseAnimation5} handleForceClose={handleShowAlert} showAnimation={showAnimation5}/>
             <Animation6 handleClose={handleCloseAnimation6} showAnimation={showAnimation6} selectedImages={selectedImages}/>
         </div>
     )

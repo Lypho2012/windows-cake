@@ -11,7 +11,7 @@ const Animation5 = (props: any) => {
         ))
     }
     
-    return <WindowsAlert handleClose={props.handleClose} handleForceClose={props.handleClose} show={props.showAnimation}>
+    return <WindowsAlert handleClose={props.handleClose} handleForceClose={props.handleForceClose} show={props.showAnimation}>
         <div style={{display:"flex",flexDirection:"column"}}>
             <div style={{
                 backgroundColor:"rgb(56,114,226)",

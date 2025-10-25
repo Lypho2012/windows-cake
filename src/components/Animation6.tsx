@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react"
-import WindowsAlert from "./WindowsAlert"
+import ColorfulAlert from "./ColorfulAlert"
 
 const Animation6 = (props: any) => {
+    const [relativeX] = useState(50)
+    const [relativeY] = useState(50)
     const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
     const [animationRan, setAnimationRan] = useState(false)
 
-    const [showCakes,setShowCakes] = useState(Array(9).fill(false))
+    const [showCakes,setShowCakes] = useState(Array(9).fill(true))
     const Cake1 = (useImage: any) => {
-        return <WindowsAlert handleClose={()=>{}} handleForceClose={()=>{}} show={showCakes[0]}>
+        return <ColorfulAlert show={showCakes[0]} background={"rgb(181,226,247)"} x={relativeX-25} y={relativeY+20}>
             {
-                useImage ? <img src={require("../images/cake1.png")}/> : <></>
+                useImage ? <img style={{width:"800px"}} src={require("../images/cake1.png")}/> : <></>
             }
-        </WindowsAlert>
+        </ColorfulAlert>
+    }
+    const Cake2 = (useImage: any) => {
+        return <ColorfulAlert show={showCakes[0]} background={"rgb(255,253,206)"} x={relativeX-15} y={relativeY}>
+            {
+                useImage ? <img style={{width:"300px"}} src={require("../images/cake2.png")}/> : <></>
+            }
+        </ColorfulAlert>
     }
     const runAnimation = async () => {
         for (let i=0; i<9; i++) {
@@ -24,11 +33,12 @@ const Animation6 = (props: any) => {
     }
     if (props.showAnimation && !animationRan){
         setAnimationRan(true)
-        runAnimation()
+        // runAnimation()
     }
     return (
-        <div>
+        <div style={{width:"100%",height:"100%"}}>
             <Cake1 useImage={props.selectedImages[0][0]}/>
+            <Cake2 useImage={props.selectedImages[0][1]}/>
         </div>
     )
 }
