@@ -1,0 +1,33 @@
+@keyframes animation-candle1 {
+    100% {
+        left: 490px; 
+        top: 150px; 
+        mask-position: -130px -250px;
+    }
+}
+.curtain {
+    width:100%;
+    height:100%;
+    transition: mask-image 2s linear;
+}
+.curtain.black-screen {
+    background-color: black;
+}
+.curtain.light-match {
+    background-color: black;
+    mask-image: radial-gradient(circle, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%);
+    mask-size: 90% 90%;
+    mask-position: 50% 50%;
+    &.animate-candle1 {
+        animation: animation-candle1 2s linear forwards;
+    }
+}
+.match {
+    width: 200px;
+    position: fixed;
+    left: 45%;
+    top: 45%;
+    &.animate-candle1 {
+        animation: animation-candle1 2s linear forwards;
+    }
+}

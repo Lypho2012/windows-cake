@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
 import ColorfulAlert from "./ColorfulAlert"
+import "./Animation6.css"
 
 const Animation6 = (props: any) => {
-    console.log(window.innerWidth)
     const [relativeX] = useState(50)
     const [relativeY] = useState(55)
     const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
     const [animationRan, setAnimationRan] = useState(false)
 
-    const [showCakes,setShowCakes] = useState(Array(9).fill(false))
-    const [showCandles,setShowCandles] = useState(Array(5).fill(false))
+    const [showCakes,setShowCakes] = useState(Array(9).fill(true))
+    const [showCandles,setShowCandles] = useState(Array(5).fill(true))
+    const [animationState, setAnimationState] = useState("none")
+
     const Cake1 = (useImage: any) => {
         return <ColorfulAlert show={showCakes[0]} background={"rgb(181,226,247)"} x={relativeX-25} y={relativeY+20}>
             {
@@ -111,17 +113,33 @@ const Animation6 = (props: any) => {
         </ColorfulAlert>
     }
 
+    const Match = () => {
+        return <img className={"match "+animationState} src={require("../images/match.png")}/>
+    }
+
     const runAnimation = async () => {
-        for (let i=0; i<9; i++) {
-            setShowCakes(showCakes.map((_,j) => i >= j ? true : false))
-            await sleep(1000)
-        }
-        for (let i=0; i<5; i++) {
-            setShowCandles(showCandles.map((_,j) => i >= j ? true : false))
-            await sleep(1000)
-        }
-        setShowCakes(Array(9).fill(false))
-        setShowCandles(Array(5).fill(false))
+        // for (let i=0; i<9; i++) {
+        //     setShowCakes(showCakes.map((_,j) => i >= j ? true : false))
+        //     await sleep(1000)
+        // }
+        // for (let i=0; i<5; i++) {
+        //     setShowCandles(showCandles.map((_,j) => i >= j ? true : false))
+        //     await sleep(1000)
+        // }
+
+        // props.setCurtainRose(true)
+        setAnimationState("black-screen")
+        await sleep(1000)
+        setAnimationState("light-match")
+        await sleep(1000)
+        setAnimationState("light-match animate-candle1")
+        await sleep(3000)
+
+        // Rest everything's state and end animation 6
+        // props.setCurtainRose(false)
+        // setAnimationState("none")
+        // setShowCakes(Array(9).fill(false))
+        // setShowCandles(Array(5).fill(false))
         props.handleClose()
         setAnimationRan(false)
     }
@@ -146,6 +164,8 @@ const Animation6 = (props: any) => {
             <Candle3/>
             <Candle4/>
             <Candle5/>
+            <div className={"curtain "+animationState}></div>
+            <Match/>
         </div>
     )
 }

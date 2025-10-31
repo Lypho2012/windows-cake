@@ -28,6 +28,7 @@ function Desktop() {
     const [showAlert, setShowAlert] = useState(false)
     const [showAnimation5, setShowAnimation5] = useState(false)
     const [showAnimation6, setShowAnimation6] = useState(false)
+    const [curtainRose, setCurtainRose] = useState(false)
 
     const dialog1Options = [
         "You failed to open the application.",
@@ -173,6 +174,8 @@ function Desktop() {
             flexDirection:"column",
             justifyContent: "center",
             cursor: showLoad ? 'wait' : 'default'}}>
+            {!curtainRose ? 
+            <>
             <Application x={Math.floor(Math.random()*(window.innerWidth-150))} y={Math.floor(Math.random()*(window.innerHeight-150))} triggerAnimation={triggerAnimations} imgSrc={require("./images/gift.png")} applicationClass={"gift-box"} width={"150px"}/>
             <Application x={20} y={20} triggerAnimation={triggerAnimation1} imgSrc={require("./images/warning.png")} applicationClass={"animation1"} width={"100px"} marginLeft={"25px"} marginTop={"25px"}/>
             <Application x={20} y={120} triggerAnimation={triggerAnimation2} imgSrc={require("./images/loading.png")} applicationClass={"animation2"} width={"100px"} marginLeft={"25px"} marginTop={"30px"}/>
@@ -180,14 +183,14 @@ function Desktop() {
             <Application x={20} y={300} triggerAnimation={triggerAnimation4} imgSrc={require("./images/shield.png")} applicationClass={"animation4"} width={"80px"} marginLeft={"37px"} marginTop={"37px"}/>
             <Application x={20} y={400} triggerAnimation={triggerAnimation5} imgSrc={require("./images/image_folder.png")} applicationClass={"animation5"} width={"80px"} marginLeft={"37px"} marginTop={"37px"}/>
             <Application x={20} y={520} triggerAnimation={triggerAnimation6} imgSrc={require("./images/cake.png")} applicationClass={"animation6"} width={"200px"} marginLeft={"-20px"}/>
-
+            </>: <></>}
             <Animation1 handleClose={handleCloseAnimation1} dialogOptions={dialog1Options} dialogCounter={animation1Counter} showDialog={showAnimation1}/>
             <Animation2 handleClose={handleCloseAnimation2} showAnimation={showAnimation2}/>
             <Animation3 handleClose={handleCloseAnimation3} showAnimation={showAnimation3}/>
             <Animation4/>
             {showAlert && (showAnimation4 || showAnimation5) && <Alert handleCloseAlert={handleCloseAlert} showAlert={showAlert}/>}
             <Animation5 handleClose={handleCloseAnimation5} handleForceClose={handleShowAlert} showAnimation={showAnimation5}/>
-            <Animation6 handleClose={handleCloseAnimation6} showAnimation={showAnimation6} selectedImages={selectedImages}/>
+            <Animation6 handleClose={handleCloseAnimation6} showAnimation={showAnimation6} selectedImages={selectedImages} setCurtainRose={setCurtainRose}/>
         </div>
     )
 }
