@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ColorfulAlert from "./ColorfulAlert"
 import "./Animation6.css"
+// import birthdaySong from "../images/birthdaySong.mp3"
+import WindowsAlert from "./WindowsAlert"
 
 const Animation6 = (props: any) => {
     const [relativeX] = useState(50)
@@ -11,6 +13,11 @@ const Animation6 = (props: any) => {
     const [showCakes,setShowCakes] = useState(Array(9).fill(true))
     const [showCandles,setShowCandles] = useState(Array(5).fill(true))
     const [animationState, setAnimationState] = useState("none")
+    
+    // const birthdaySongAudio = new Audio(birthdaySong)
+
+    const [makeWish, setMakeWish] = useState(false)
+    const [blowCandles, setBlowCandles] = useState(false)
 
     const Cake1 = (useImage: any) => {
         return <ColorfulAlert show={showCakes[0]} background={"rgb(181,226,247)"} x={relativeX-25} y={relativeY+20}>
@@ -117,6 +124,39 @@ const Animation6 = (props: any) => {
         return <img className={"match "+animationState} src={require("../images/match.png")}/>
     }
 
+    const handleCloseLetter = () => {
+        setMakeWish(false)
+        setBlowCandles(true)
+    }
+
+    const Letter = () => {
+        return <div style={{position:"fixed",left:"35%",top:"25%",display:"flex"}}>
+                <img src={require("../images/letter.png")} style={{position:"fixed",width:"400px"}}/>
+                <textarea style={{
+                    width:"450px",
+                    background:"rgba(0,0,0,0.3)",
+                    height:"100px",
+                    border:"none",
+                    position:"fixed",
+                    fontSize:"20px",
+                    padding:"30px",
+                    color:"white",
+                    marginTop:"150px"}}/>
+                <button onClick={handleCloseLetter} 
+                style={{
+                    position:"absolute",
+                    height:"30px",
+                    top:"310px",
+                    left:"200px",
+                    width:"100px",
+                    boxShadow: "1px 1px 1px rgba(0, 0, 0, 0.2)",
+                    cursor:"pointer",
+                    background:"rgba(206, 156, 6, 1)",
+                    color:"white",
+                    border:"none"}}>Make Wish!</button>
+        </div>
+    }
+
     const runAnimation = async () => {
         // for (let i=0; i<9; i++) {
         //     setShowCakes(showCakes.map((_,j) => i >= j ? true : false))
@@ -144,6 +184,9 @@ const Animation6 = (props: any) => {
         await sleep(3000)
         setAnimationState("song")
         await sleep(3000)
+        // birthdaySongAudio.play()
+        await sleep(3000)
+        setMakeWish(true)
 
         // Rest everything's state and end animation 6
         // props.setCurtainRose(false)
@@ -176,6 +219,7 @@ const Animation6 = (props: any) => {
             <Candle5/>
             <Match/>
             {animationRan && <div className={"curtain "+animationState}></div>}
+            {makeWish && <Letter/>}
         </div>
     )
 }

@@ -68,8 +68,6 @@
     mask-composite: intersect;
     mask-size: 1500px 1500px;
     &.light-match {
-        left: 0;
-        top: 0;
         background-color: black;
         mask-image: var(--glow);
         mask-position: -400px -200px;
@@ -99,9 +97,6 @@
         animation: animation-candle5 2s linear forwards;
     }
     &.song {
-        position: fixed;
-        left: 0;
-        top: 0;
         mask-image: 
         var(--glow),var(--glow),var(--glow),var(--glow),var(--glow);
         mask-size: 1500px 1500px, 1500px 1500px, 1500px 1500px, 1500px 1500px, 1500px 1500px;
@@ -109,6 +104,7 @@
     }
 }
 .match {
+    position: fixed;
     visibility: hidden;
 }
 .match.light-match {
