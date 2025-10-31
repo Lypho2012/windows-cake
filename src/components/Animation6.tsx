@@ -2,7 +2,7 @@ import { useState } from "react"
 import ColorfulAlert from "./ColorfulAlert"
 import "./Animation6.css"
 // import birthdaySong from "../images/birthdaySong.mp3"
-import WindowsAlert from "./WindowsAlert"
+import Vara from 'vara';
 
 const Animation6 = (props: any) => {
     const [relativeX] = useState(50)
@@ -157,6 +157,48 @@ const Animation6 = (props: any) => {
         </div>
     }
 
+    const handleBlowCandles = () => {
+        setBlowCandles(false)
+        setAnimationState("black-screen")
+        const vara = new Vara(
+            "#container", "https://cdn.jsdelivr.net/npm/vara@1.4.0/fonts/Pacifico/PacificoSLO.json",
+            [
+                {
+                text: "Happy Birthday Mom!",
+                y: 350,
+                fromCurrentPosition: { y: false },
+                duration: 3000
+                }
+            ],
+            {
+                strokeWidth: 2,
+                color: "#ffe30bff",
+                fontSize: 50,
+                textAlign: "center"
+            }
+        );
+        vara.ready(() => {
+            let erase = true;
+            vara.animationEnd((i:any, o:any) => {
+                if (i == "no_erase") erase = false;
+                if (erase) {
+                o.container.style.transition = "opacity 1s 1s";
+                o.container.style.opacity = 0;
+                }
+            });
+        }); 
+    }
+
+    const BlowCandle = () => {
+        return <button style={{
+            width:"300px",
+            fontSize:"30px",
+            position:"fixed",
+            left:"calc(50% - 150px)",
+            top:"calc(50% - 10px)"}}
+            onClick={handleBlowCandles}>Blow out the candles!</button>
+    }
+
     const runAnimation = async () => {
         // for (let i=0; i<9; i++) {
         //     setShowCakes(showCakes.map((_,j) => i >= j ? true : false))
@@ -182,7 +224,7 @@ const Animation6 = (props: any) => {
         await sleep(3000)
         setAnimationState("light-match animate-candle5")
         await sleep(3000)
-        setAnimationState("song")
+        setAnimationState("light-match song")
         await sleep(3000)
         // birthdaySongAudio.play()
         await sleep(3000)
@@ -220,6 +262,8 @@ const Animation6 = (props: any) => {
             <Match/>
             {animationRan && <div className={"curtain "+animationState}></div>}
             {makeWish && <Letter/>}
+            <div id="container" style={{position:"fixed",width:"100%",height:"100%",pointerEvents: "none"}}></div>
+            {blowCandles && <BlowCandle/>}
         </div>
     )
 }
