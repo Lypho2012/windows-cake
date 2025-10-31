@@ -134,6 +134,7 @@ const Animation6 = (props: any) => {
         await sleep(1000)
         setAnimationState("light-match animate-candle1")
         await sleep(3000)
+        setAnimationState("light-match lit-candle1")
 
         // Rest everything's state and end animation 6
         // props.setCurtainRose(false)

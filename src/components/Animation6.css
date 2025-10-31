@@ -2,7 +2,7 @@
     100% {
         left: 490px; 
         top: 150px; 
-        mask-position: -130px -250px;
+        mask-position: -100px -550px;
     }
 }
 .curtain {
@@ -11,23 +11,69 @@
     transition: mask-image 2s linear;
 }
 .curtain.black-screen {
-    background-color: black;
+    /* background-color: black; */
 }
 .curtain.light-match {
+    mask-mode:alpha;
+    mask-composite: intersect;
+    &.lit-candle1 {
+        background-color: black;
+        mask-image: 
+        radial-gradient(circle at 640px 200px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%);
+    }
+    &.lit-candle2 {
+        mask-image: 
+        radial-gradient(circle at 640px 200px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%), 
+        radial-gradient(circle at 1040px 200px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%);
+    }
+    &.lit-candle3 {
+        mask-image: 
+        radial-gradient(circle at 640px 200px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%), 
+        radial-gradient(circle at 1040px 200px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%),
+        radial-gradient(circle at 850px 50px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%);
+    }
+    &.lit-candle4 {
+        mask-image: 
+        radial-gradient(circle at 640px 200px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%), 
+        radial-gradient(circle at 1040px 200px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%),
+        radial-gradient(circle at 850px 50px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%),
+        radial-gradient(circle at 530px 490px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%);
+    }
+    &.lit-candle5 {
+        mask-image: 
+        radial-gradient(circle at 640px 200px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%), 
+        radial-gradient(circle at 1040px 200px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%),
+        radial-gradient(circle at 850px 50px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%),
+        radial-gradient(circle at 530px 490px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%),
+        radial-gradient(circle at 1150px 490px, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%);
+    }
+}
+.match-light.light-match {
+    width: 100%;
+    height: 100%;
     background-color: black;
+    mask-mode:alpha;
+    mask-composite: intersect;
     mask-image: radial-gradient(circle, transparent 0%,transparent 3%,transparent 5%,black 8%,black 20%,black 100%);
-    mask-size: 90% 90%;
-    mask-position: 50% 50%;
+    mask-size: 1500px 1500px;
+    mask-position: -400px -200px;
     &.animate-candle1 {
         animation: animation-candle1 2s linear forwards;
+    }
+    &.lit-candle1 {
+        mask-position: -100px -550px;
     }
 }
 .match {
     width: 200px;
     position: fixed;
-    left: 45%;
-    top: 45%;
+    left: 200px;
+    top: 500px;
     &.animate-candle1 {
         animation: animation-candle1 2s linear forwards;
+    }
+    &.lit-candle1 {
+        left: 490px; 
+        top: 150px; 
     }
 }
