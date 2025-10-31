@@ -134,7 +134,8 @@ const Animation6 = (props: any) => {
         await sleep(1000)
         setAnimationState("light-match animate-candle1")
         await sleep(3000)
-        setAnimationState("light-match lit-candle1")
+        setAnimationState("light-match animate-candle2")
+        await sleep(3000)
 
         // Rest everything's state and end animation 6
         // props.setCurtainRose(false)
@@ -165,8 +166,8 @@ const Animation6 = (props: any) => {
             <Candle3/>
             <Candle4/>
             <Candle5/>
-            <div className={"curtain "+animationState}></div>
             <Match/>
+            {animationRan && <div className={"curtain "+animationState}></div>}
         </div>
     )
 }
