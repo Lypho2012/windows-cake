@@ -136,14 +136,20 @@ const Animation6 = (props: any) => {
         await sleep(3000)
         setAnimationState("light-match animate-candle2")
         await sleep(3000)
+        setAnimationState("light-match animate-candle3")
+        await sleep(3000)
+        setAnimationState("light-match animate-candle4")
+        await sleep(3000)
+        setAnimationState("light-match animate-candle5")
+        await sleep(3000)
 
         // Rest everything's state and end animation 6
         // props.setCurtainRose(false)
         // setAnimationState("none")
         // setShowCakes(Array(9).fill(false))
         // setShowCandles(Array(5).fill(false))
-        props.handleClose()
-        setAnimationRan(false)
+        // props.handleClose()
+        // setAnimationRan(false)
     }
     if (props.showAnimation && !animationRan){
         setAnimationRan(true)
