@@ -101,9 +101,6 @@
         mask-size: 1500px 1500px, 1500px 1500px, 1500px 1500px, 1500px 1500px, 1500px 1500px;
         mask-position: -100px -550px, 300px -550px, -220px -250px, 400px -250px, 100px -700px;
     }
-    &.black-screen {
-        mask-image: radial-gradient(circle,black 100%);
-    }
 }
 .match {
     position: fixed;
