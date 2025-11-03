@@ -3,66 +3,99 @@
 }
 @keyframes animation-candle1 {
     0% {
+    }
+    100% {
+        mask-position: -100px -550px;
+    }
+}
+@keyframes animation-candle2 {
+    0% {
+        mask-position: -100px -550px, -100px -550px;
+    }
+    100% {
+        mask-position: -100px -550px, 300px -550px;
+    }
+}
+@keyframes animation-candle3 {
+    0% {
+        mask-position: -100px -550px, 300px -550px, 300px -550px;
+    }
+    100% {
+        mask-position: -100px -550px, 300px -550px, -220px -250px;
+    }
+}
+@keyframes animation-candle4 {
+    0% {
+        mask-position: -100px -550px, 300px -550px, -220px -250px, -220px -250px;
+    }
+    100% {
+        mask-position: -100px -550px, 300px -550px, -220px -250px, 400px -250px;
+    }
+}
+@keyframes animation-candle5 {
+    0% {
+        mask-position: -100px -550px, 300px -550px, -220px -250px, 400px -250px, 400px -250px;
+    }
+    100% {
+        mask-position: -100px -550px, 300px -550px, -220px -250px, 400px -250px, 100px -700px;
+    }
+}
+@keyframes animation-match1 {
+    0% {
         left: 200px;
         top: 500px;
     }
     100% {
         left: 490px; 
         top: 150px; 
-        mask-position: -100px -550px;
     }
 }
-@keyframes animation-candle2 {
+@keyframes animation-match2 {
     0% {
         left: 490px; 
         top: 150px; 
-        mask-position: -100px -550px, -100px -550px;
     }
     100% {
         left: 890px; 
         top: 150px; 
-        mask-position: -100px -550px, 300px -550px;
     }
 }
-@keyframes animation-candle3 {
+@keyframes animation-match3 {
     0% {
         left: 890px; 
         top: 150px; 
-        mask-position: -100px -550px, 300px -550px, 300px -550px;
     }
     100% {
         left: 370px; 
         top: 440px; 
-        mask-position: -100px -550px, 300px -550px, -220px -250px;
     }
 }
-@keyframes animation-candle4 {
+@keyframes animation-match4 {
     0% {
         left: 370px; 
         top: 440px; 
-        mask-position: -100px -550px, 300px -550px, -220px -250px, -220px -250px;
     }
     100% {
         left: 990px; 
         top: 440px; 
-        mask-position: -100px -550px, 300px -550px, -220px -250px, 400px -250px;
     }
 }
-@keyframes animation-candle5 {
+@keyframes animation-match5 {
     0% {
         left: 990px; 
         top: 440px; 
-        mask-position: -100px -550px, 300px -550px, -220px -250px, 400px -250px, 400px -250px;
     }
     100% {
         left: 690px; 
         top: 10px; 
-        mask-position: -100px -550px, 300px -550px, -220px -250px, 400px -250px, 100px -700px;
     }
 }
 .curtain {
-    width:100%;
-    height:100%;
+    width:100vw;
+    height:100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
     transition: mask-image 2s linear;
     mask-mode:alpha;
     mask-composite: intersect;
@@ -101,6 +134,9 @@
         mask-size: 1500px 1500px, 1500px 1500px, 1500px 1500px, 1500px 1500px, 1500px 1500px;
         mask-position: -100px -550px, 300px -550px, -220px -250px, 400px -250px, 100px -700px;
     }
+    &.none {
+        background: none;
+    }
 }
 .match {
     position: fixed;
@@ -113,18 +149,18 @@
     left: 200px;
     top: 500px;
     &.animate-candle1 {
-        animation: animation-candle1 2s linear forwards;
+        animation: animation-match1 2s linear forwards;
     }
     &.animate-candle2 {
-        animation: animation-candle2 2s linear forwards;
+        animation: animation-match2 2s linear forwards;
     }
     &.animate-candle3 {
-        animation: animation-candle3 2s linear forwards;
+        animation: animation-match3 2s linear forwards;
     }
     &.animate-candle4 {
-        animation: animation-candle4 2s linear forwards;
+        animation: animation-match4 2s linear forwards;
     }
     &.animate-candle5 {
-        animation: animation-candle5 2s linear forwards;
+        animation: animation-match5 2s linear forwards;
     }
 }

@@ -2,7 +2,6 @@ import { useState } from "react"
 import ColorfulAlert from "./ColorfulAlert"
 import "./Animation6.css"
 // import birthdaySong from "../images/birthdaySong.mp3"
-import Vara from 'vara';
 
 const Animation6 = (props: any) => {
     const [relativeX] = useState(50)
@@ -17,8 +16,7 @@ const Animation6 = (props: any) => {
     // const birthdaySongAudio = new Audio(birthdaySong)
 
     const [makeWish, setMakeWish] = useState(false)
-    const [blowCandles, setBlowCandles] = useState(false)
-    const [showMessage, setShowMessage] = useState(false)
+    const [blowCandles, setBlowCandles] = useState(true)
 
     const Cake1 = (useImage: any) => {
         return <ColorfulAlert show={showCakes[0]} background={"rgb(181,226,247)"} x={relativeX-25} y={relativeY+20}>
@@ -125,8 +123,10 @@ const Animation6 = (props: any) => {
         return <img className={"match "+animationState} src={require("../images/match.png")}/>
     }
 
-    const handleCloseLetter = () => {
+    const handleCloseLetter = async () => {
         setMakeWish(false)
+        // TODO: applause
+        await sleep(3000)
         setBlowCandles(true)
     }
 
@@ -160,45 +160,14 @@ const Animation6 = (props: any) => {
     }
 
     const handleBlowCandles = async () => {
-        setShowMessage(true)
         setBlowCandles(false)
+        await sleep(2000)
+        setAnimationState("none")
+        props.handleClose()
         setShowCakes(Array(9).fill(false))
         setShowCandles(Array(5).fill(false))
-        setAnimationState("none")
-        await sleep(2000)
-        const vara = new Vara(
-            "#container", "https://cdn.jsdelivr.net/npm/vara@1.4.0/fonts/Pacifico/PacificoSLO.json",
-            [
-                {
-                text: "Happy Birthday Mom!",
-                y: 350,
-                fromCurrentPosition: { y: false },
-                duration: 3000
-                }
-            ],
-            {
-                strokeWidth: 2,
-                color: "#ffe30bff",
-                fontSize: 50,
-                textAlign: "center"
-            }
-        );
-        vara.ready(() => {
-            let erase = true;
-            vara.animationEnd((i:any, o:any) => {
-                if (i == "no_erase") erase = false;
-                if (erase) {
-                o.container.style.transition = "opacity 1s 1s";
-                o.container.style.opacity = 0;
-                }
-            });
-        }); 
-        await sleep(5000)
-        // Reset everything's state and end animation 6
-        setShowMessage(false)
-        props.setCurtainRose(false)
-        props.handleClose()
         setAnimationRan(false)
+        props.setCurtainRose(false)
     }
 
     const BlowCandle = () => {
@@ -206,7 +175,7 @@ const Animation6 = (props: any) => {
             width:"300px",
             fontSize:"30px",
             position:"fixed",
-            left:"calc(50% - 175px)",
+            left:"calc(690px)",
             top:"calc(50% - 10px)"}}
             onClick={handleBlowCandles}>Blow out the candles!</button>
     }
@@ -266,7 +235,6 @@ const Animation6 = (props: any) => {
             <Match/>
             {props.showAnimation && <div className={"curtain "+animationState}></div>}
             {makeWish && <Letter/>}
-            <div id="container" style={showMessage?{position:"fixed",width:"100%",height:"100%",backgroundColor:"black"}:{pointerEvents: "none"}}></div>
             {blowCandles && <BlowCandle/>}
         </div>
     )

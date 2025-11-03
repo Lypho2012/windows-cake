@@ -11,6 +11,7 @@ import Alert from "./components/Alert";
 import Application from "./components/Application";
 import Animation5 from "./components/Animation5";
 import Animation6 from "./components/Animation6";
+import Animation7 from "./components/Animation7";
 
 function Desktop() {
     // const [screenHeight,setScreenHeight] = useState(window.innerHeight)
@@ -28,6 +29,7 @@ function Desktop() {
     const [showAlert, setShowAlert] = useState(false)
     const [showAnimation5, setShowAnimation5] = useState(false)
     const [showAnimation6, setShowAnimation6] = useState(false)
+    const [showAnimation7, setShowAnimation7] = useState(false)
     const [curtainRose, setCurtainRose] = useState(false)
 
     const dialog1Options = [
@@ -112,9 +114,11 @@ function Desktop() {
 
     const handleCloseAnimation6 = async () => {
         setShowAnimation6(false)
-        setShowLoad(true)
-        await sleep(1000)
-        setShowLoad(false)
+        setShowAnimation7(true)
+    }
+
+    const handleCloseAnimation7 = async () => {
+        setShowAnimation7(false)
     }
 
     const Animation4 = () => {
@@ -191,6 +195,7 @@ function Desktop() {
             {showAlert && (showAnimation4 || showAnimation5) && <Alert handleCloseAlert={handleCloseAlert} showAlert={showAlert}/>}
             <Animation5 handleClose={handleCloseAnimation5} handleForceClose={handleShowAlert} showAnimation={showAnimation5}/>
             <Animation6 handleClose={handleCloseAnimation6} showAnimation={showAnimation6} selectedImages={selectedImages} setCurtainRose={setCurtainRose}/>
+            <Animation7 handleClose={handleCloseAnimation7} showAnimation={showAnimation7} setCurtainRose={setCurtainRose}/>
         </div>
     )
 }
