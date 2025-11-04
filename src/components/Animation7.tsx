@@ -29,7 +29,7 @@ const Animation7 = (props: any) => {
         cur.animationEnd(async (i:any, o:any) => {
           o.characters.forEach(function (i:any) {
             i.querySelectorAll("path").forEach(function (j: any) {
-              j.style.transition = "opacity 2s 2s"
+              j.style.transition = "opacity 2s 1s"
               j.style.opacity = 0;
             });
           });

@@ -16,7 +16,7 @@ const Animation6 = (props: any) => {
     // const birthdaySongAudio = new Audio(birthdaySong)
 
     const [makeWish, setMakeWish] = useState(false)
-    const [blowCandles, setBlowCandles] = useState(true)
+    const [blowCandles, setBlowCandles] = useState(false)
 
     const Cake1 = (useImage: any) => {
         return <ColorfulAlert show={showCakes[0]} background={"rgb(181,226,247)"} x={relativeX-25} y={relativeY+20}>
@@ -160,7 +160,8 @@ const Animation6 = (props: any) => {
     }
 
     const handleBlowCandles = async () => {
-        // setBlowCandles(false)
+        setAnimationState("black-screen")
+        setBlowCandles(false)
         await sleep(2000)
         setAnimationState("none")
         props.handleClose()
