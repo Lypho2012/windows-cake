@@ -160,7 +160,7 @@ const Animation6 = (props: any) => {
     }
 
     const handleBlowCandles = async () => {
-        setBlowCandles(false)
+        // setBlowCandles(false)
         await sleep(2000)
         setAnimationState("none")
         props.handleClose()
