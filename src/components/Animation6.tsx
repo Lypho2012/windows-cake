@@ -2,6 +2,10 @@ import { useState } from "react"
 import ColorfulAlert from "./ColorfulAlert"
 import "./Animation6.css"
 // import birthdaySong from "../images/birthdaySong.mp3"
+// import applause from "../images/applause.mp3"
+// import lightMatch from "../images/lightMatch.mp3"
+// import fire from "../images/fire.mp3"
+// import blowCandles from "../images/blowCandles.mp3"
 
 const Animation6 = (props: any) => {
     const [relativeX] = useState(50)
@@ -14,6 +18,10 @@ const Animation6 = (props: any) => {
     const [animationState, setAnimationState] = useState("none")
     
     // const birthdaySongAudio = new Audio(birthdaySong)
+    // const applauseAudio = new Audio(applause)
+    // const lightMatchAudio = new Audio(lightMatch)
+    // const fireAudio = new Audio(fire)
+    // const blowCandlesAudio = new Audio(blowCandles)
 
     const [makeWish, setMakeWish] = useState(false)
     const [blowCandles, setBlowCandles] = useState(false)
@@ -125,7 +133,7 @@ const Animation6 = (props: any) => {
 
     const handleCloseLetter = async () => {
         setMakeWish(false)
-        // TODO: applause
+        // TODO: applauseAudio.play()
         await sleep(3000)
         setBlowCandles(true)
     }
@@ -160,6 +168,8 @@ const Animation6 = (props: any) => {
     }
 
     const handleBlowCandles = async () => {
+        // TODO: blowCandlesAudio.play()
+        // TODO: applauseAudio.play()
         setAnimationState("black-screen")
         setBlowCandles(false)
         await sleep(2000)
@@ -194,6 +204,8 @@ const Animation6 = (props: any) => {
         props.setCurtainRose(true)
         setAnimationState("black-screen")
         await sleep(1500)
+        // TODO: lightMtchAudio.play()
+        // TODO: fireAudio.play()
         setAnimationState("light-match")
         await sleep(1500)
         setAnimationState("light-match animate-candle1")
@@ -208,7 +220,7 @@ const Animation6 = (props: any) => {
         await sleep(3000)
         setAnimationState("light-match song")
         await sleep(3000)
-        // birthdaySongAudio.play()
+        // TODO: birthdaySongAudio.play()
         await sleep(3000)
         setMakeWish(true)
     }
