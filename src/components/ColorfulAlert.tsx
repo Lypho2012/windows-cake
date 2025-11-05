@@ -13,8 +13,8 @@ const ColorfulAlert: React.FC<any> = ({show, background, children, x, y}) => {
         textAlign:"left",
         overflowWrap: "break-word",
         position:"absolute",
-        left: x+"vw",
-        top: y+"vh",
+        left: x+"px",
+        top: y+"px",
         margin:"0"}}>
         <div style={{display:"flex",flexDirection:"row"}}>
             <div style={{
