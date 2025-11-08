@@ -1,25 +1,21 @@
 import { useEffect, useState } from "react"
 import ColorfulAlert from "./ColorfulAlert"
 import "./Animation6.css"
-// import birthdaySong from "../images/birthdaySong.mp3"
-// import applause from "../images/applause.mp3"
-// import lightMatch from "../images/lightMatch.mp3"
-// import fire from "../images/fire.mp3"
-// import blowCandles from "../images/blowCandles.mp3"
+import birthdaySong from "../images/birthdaySong.mp3"
+import applause from "../images/applause.mp3"
+import lightMatch from "../images/lightMatch.mp3"
 
 const Animation6 = (props: any) => {
     const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
     const [animationRan, setAnimationRan] = useState(false)
 
-    const [showCakes,setShowCakes] = useState(Array(9).fill(true))
-    const [showCandles,setShowCandles] = useState(Array(5).fill(true))
-    const [animationState, setAnimationState] = useState("song")
+    const [showCakes,setShowCakes] = useState(Array(9).fill(false))
+    const [showCandles,setShowCandles] = useState(Array(5).fill(false))
+    const [animationState, setAnimationState] = useState("none")
     
-    // const birthdaySongAudio = new Audio(birthdaySong)
-    // const applauseAudio = new Audio(applause)
-    // const lightMatchAudio = new Audio(lightMatch)
-    // const fireAudio = new Audio(fire)
-    // const blowCandlesAudio = new Audio(blowCandles)
+    const birthdaySongAudio = new Audio(birthdaySong)
+    const applauseAudio = new Audio(applause)
+    const lightMatchAudio = new Audio(lightMatch)
 
     const [makeWish, setMakeWish] = useState(false)
     const [blowCandles, setBlowCandles] = useState(false)
@@ -131,8 +127,6 @@ const Animation6 = (props: any) => {
 
     const handleCloseLetter = async () => {
         setMakeWish(false)
-        // TODO: applauseAudio.play()
-        await sleep(3000)
         setBlowCandles(true)
     }
 
@@ -166,10 +160,10 @@ const Animation6 = (props: any) => {
     }
 
     const handleBlowCandles = async () => {
-        // TODO: blowCandlesAudio.play()
-        // TODO: applauseAudio.play()
-        setAnimationState("black-screen")
         setBlowCandles(false)
+        applauseAudio.play()
+        setAnimationState("black-screen")
+        await sleep(7000)
         await sleep(2000)
         setAnimationState("none")
         props.handleClose()
@@ -201,9 +195,9 @@ const Animation6 = (props: any) => {
 
         props.setCurtainRose(true)
         setAnimationState("black-screen")
-        await sleep(1500)
-        // TODO: lightMtchAudio.play()
-        // TODO: fireAudio.play()
+        await sleep(500)
+        lightMatchAudio.play()
+        await sleep(500)
         setAnimationState("light-match")
         await sleep(1500)
         setAnimationState("light-match animate-candle1")
@@ -218,8 +212,8 @@ const Animation6 = (props: any) => {
         await sleep(3000)
         setAnimationState("light-match song")
         await sleep(3000)
-        // TODO: birthdaySongAudio.play()
-        await sleep(3000)
+        birthdaySongAudio.play()
+        await sleep(20000)
         setMakeWish(true)
     }
     if (props.showAnimation && !animationRan){
